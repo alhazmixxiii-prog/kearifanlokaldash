@@ -1,0 +1,1645 @@
+<!DOCTYPE html>
+<html lang="id" class="h-full">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KEARIFAN LOKAL DASH: Special IX-A - IX-H Edition</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                        display: ['Fredoka', 'cursive']
+                    },
+                    colors: {
+                        nusa: {
+                            emerald: '#059669',
+                            gold: '#F59E0B',
+                            terracotta: '#E11D48',
+                            sky: '#0284C7',
+                            wood: '#78350F',
+                            sand: '#FEF3C7',
+                            dark: '#0F172A'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        /* Keyframe Animations */
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-12px) rotate(2deg); }
+        }
+        @keyframes pulseGlow {
+            0%, 100% { box-shadow: 0 0 15px rgba(245, 158, 11, 0.4), inset 0 0 10px rgba(245, 158, 11, 0.2); }
+            50% { box-shadow: 0 0 35px rgba(245, 158, 11, 0.8), inset 0 0 20px rgba(245, 158, 11, 0.4); }
+        }
+        @keyframes bounceSlow {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        @keyframes batikPatternMove {
+            0% { background-position: 0 0; }
+            100% { background-position: 200px 200px; }
+        }
+        @keyframes cloudsDrift {
+            0% { transform: translateX(-10%); }
+            100% { transform: translateX(110%); }
+        }
+        @keyframes glowRotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        @keyframes cardPop {
+            0% { transform: scale(0.9) translateY(10px); opacity: 0; }
+            100% { transform: scale(1) translateY(0); opacity: 1; }
+        }
+        @keyframes badgePulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.08); }
+        }
+        @keyframes shimmer {
+            0% { background-position: -200% 0; }
+            100% { background-position: 200% 0; }
+        }
+
+        .animate-float { animation: float 4s ease-in-out infinite; }
+        .animate-pulse-glow { animation: pulseGlow 2.5s infinite; }
+        .animate-bounce-slow { animation: bounceSlow 1.8s infinite; }
+        .animate-spin-slow { animation: glowRotate 20s linear infinite; }
+        .animate-card-pop { animation: cardPop 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards; }
+        .animate-badge-pulse { animation: badgePulse 2s ease-in-out infinite; }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #0f172a; }
+        ::-webkit-scrollbar-thumb { background: #059669; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #10b981; }
+
+        .glass-panel {
+            background: rgba(15, 23, 42, 0.85);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(245, 158, 11, 0.3);
+        }
+        
+        .btn-game {
+            transition: all 0.22s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        .btn-game:hover {
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 10px 20px -5px rgba(16, 185, 129, 0.4);
+        }
+        .btn-game:active {
+            transform: translateY(1px) scale(0.98);
+        }
+
+        /* Animated Batik Background Overlay */
+        .batik-bg-overlay {
+            background-image: radial-gradient(rgba(245, 158, 11, 0.12) 2px, transparent 2px), radial-gradient(rgba(5, 150, 105, 0.12) 2px, transparent 2px);
+            background-size: 40px 40px;
+            background-position: 0 0, 20px 20px;
+            animation: batikPatternMove 25s linear infinite;
+        }
+
+        .class-badge-btn {
+            transition: all 0.2s ease;
+        }
+        .class-badge-btn.selected {
+            background: linear-gradient(135deg, #059669 0%, #0d9488 100%);
+            color: #ffffff;
+            border-color: #F59E0B;
+            box-shadow: 0 0 15px rgba(16, 185, 129, 0.5);
+            transform: translateY(-2px) scale(1.05);
+        }
+    </style>
+</head>
+<body class="h-full bg-slate-950 text-slate-100 font-sans select-none overflow-x-hidden">
+
+    <div class="fixed top-4 right-4 z-50 flex gap-2">
+        <button id="btn-sound" onclick="gameAudio.toggleSound()" title="Efek Suara" class="w-11 h-11 rounded-full bg-slate-900/90 border border-amber-500/40 text-amber-400 flex items-center justify-center shadow-lg hover:bg-slate-800 transition">
+            <i class="fas fa-volume-up text-lg" id="sound-icon"></i>
+        </button>
+        <button id="btn-music" onclick="gameAudio.toggleMusic()" title="Musik Latar" class="w-11 h-11 rounded-full bg-slate-900/90 border border-emerald-500/40 text-emerald-400 flex items-center justify-center shadow-lg hover:bg-slate-800 transition">
+            <i class="fas fa-music text-lg" id="music-icon"></i>
+        </button>
+    </div>
+
+    <!-- APP CONTAINER -->
+    <div id="app-container" class="min-h-screen w-full flex flex-col justify-center items-center relative">
+
+        <!-- ==================== 1. LOADING SCREEN ==================== -->
+        <section id="screen-loading" class="w-full min-h-screen flex flex-col justify-between items-center p-6 text-center relative bg-gradient-to-b from-sky-950 via-emerald-950 to-slate-950 overflow-hidden">
+            
+            <!-- Animated Clouds Background -->
+            <div class="absolute inset-0 pointer-events-none overflow-hidden opacity-30">
+                <div class="absolute top-10 w-96 h-20 bg-white/10 rounded-full blur-xl animate-[cloudsDrift_25s_linear_infinite]"></div>
+                <div class="absolute top-36 w-72 h-16 bg-white/10 rounded-full blur-xl animate-[cloudsDrift_18s_linear_infinite_delay-3s]"></div>
+            </div>
+
+            <div class="mt-8 z-10">
+                <span class="bg-amber-500/20 text-amber-300 border border-amber-500/40 px-4 py-1.5 rounded-full text-xs font-semibold tracking-widest uppercase shadow-md">
+                    🌿 RUN • THINK • ANSWER • PRESERVE
+                </span>
+                <h1 class="text-4xl md:text-6xl font-display font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-amber-300 via-emerald-300 to-teal-200 mt-4 drop-shadow-lg">
+                    KEARIFAN LOKAL DASH
+                </h1>
+                <p class="text-slate-300 text-xs md:text-sm mt-1 font-medium">Spesial Kelas IX A - IX H • IPS SMP Nusantara</p>
+            </div>
+
+            <!-- Enhanced Illustration & Animation Container -->
+            <div class="relative w-full max-w-lg h-64 flex items-center justify-center my-4 overflow-hidden rounded-3xl bg-slate-900/80 border border-amber-500/30 shadow-2xl backdrop-blur-md">
+                
+                <!-- Rotating Sun Glow Effect -->
+                <div class="absolute top-6 left-1/2 -translate-x-1/2 w-44 h-44 rounded-full bg-gradient-to-tr from-amber-500/20 to-emerald-500/30 blur-2xl animate-spin-slow"></div>
+
+                <!-- Nusantara SVG Scene Backdrop -->
+                <svg class="absolute inset-0 w-full h-full" viewBox="0 0 500 200" preserveAspectRatio="none">
+                    <defs>
+                        <linearGradient id="skyGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+                            <stop offset="0%" stop-color="#0c4a6e" />
+                            <stop offset="100%" stop-color="#064e3b" />
+                        </linearGradient>
+                        <linearGradient id="sunGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" stop-color="#FBBF24" />
+                            <stop offset="100%" stop-color="#F59E0B" />
+                        </linearGradient>
+                    </defs>
+                    <rect width="500" height="200" fill="url(#skyGrad)" opacity="0.4"/>
+                    
+                    <circle cx="250" cy="55" r="32" fill="url(#sunGrad)" opacity="0.85"/>
+
+                    <!-- Borobudur & Joglo Silhouettes -->
+                    <path d="M180 160 L200 130 L210 130 L215 110 L220 110 L225 90 L275 90 L280 110 L285 110 L290 130 L300 130 L320 160 Z" fill="#042f2e" opacity="0.8"/>
+                    <circle cx="250" cy="80" r="7" fill="#042f2e"/>
+                    <circle cx="235" cy="100" r="5" fill="#042f2e"/>
+                    <circle cx="265" cy="100" r="5" fill="#042f2e"/>
+
+                    <path d="M0 160 Q125 120 250 160 T500 160 L500 200 L0 200 Z" fill="#047857"/>
+                    <path d="M0 145 Q150 95 300 145 T600 145 L600 200 L0 200 Z" fill="#065f46" opacity="0.65"/>
+
+                    <polygon points="40,165 40,110 50,110 55,130 65,130 70,165" fill="#78350F"/>
+                    <polygon points="430,165 430,110 440,110 445,130 455,130 460,165" fill="#78350F"/>
+                </svg>
+
+                <!-- Animated SMP Runner Avatar with Udeng Scarf -->
+                <div class="relative z-10 flex flex-col items-center animate-bounce-slow">
+                    <svg width="110" height="110" viewBox="0 0 100 100">
+                        <circle cx="50" cy="24" r="14" fill="#FCD34D"/>
+                        <path d="M34 22 C34 14, 66 14, 66 22 Z" fill="#78350F"/>
+                        <path d="M60 14 L72 10 L64 22 Z" fill="#B45309"/>
+                        <circle cx="50" cy="12" r="3.5" fill="#DC2626"/>
+                        <circle cx="45" cy="24" r="2" fill="#0F172A"/>
+                        <circle cx="55" cy="24" r="2" fill="#0F172A"/>
+                        <path d="M46 29 Q50 33 54 29" stroke="#0F172A" stroke-width="1.5" fill="none"/>
+                        <rect x="39" y="38" width="22" height="30" rx="4" fill="#FFFFFF"/>
+                        <line x1="42" y1="40" x2="58" y2="66" stroke="#B45309" stroke-width="4"/>
+                        <polygon points="48,38 52,38 50,54" fill="#1E3A8A"/>
+                        <rect x="39" y="68" width="22" height="16" rx="2" fill="#1E3A8A"/>
+                        <line x1="43" y1="84" x2="33" y2="98" stroke="#FCD34D" stroke-width="5" stroke-linecap="round"/>
+                        <line x1="57" y1="84" x2="69" y2="94" stroke="#FCD34D" stroke-width="5" stroke-linecap="round"/>
+                        <circle cx="31" cy="98" r="4" fill="#1E293B"/>
+                        <circle cx="71" cy="94" r="4" fill="#1E293B"/>
+                    </svg>
+                </div>
+            </div>
+
+            <!-- Messages & Progress Bar -->
+            <div class="w-full max-w-md mb-8 z-10">
+                <p id="loading-msg" class="text-amber-300 font-semibold mb-2 animate-pulse text-base md:text-lg">
+                    Memuat Animasi & Kearifan Lokal IX-A s/d IX-H...
+                </p>
+                
+                <div class="w-full bg-slate-900 rounded-full h-4 border border-emerald-500/40 overflow-hidden relative shadow-inner">
+                    <div id="loading-bar" class="bg-gradient-to-r from-emerald-500 via-amber-400 to-teal-400 h-full w-0 transition-all duration-300 rounded-full shadow-lg"></div>
+                </div>
+                <div class="flex justify-between items-center text-xs text-slate-400 mt-2 font-mono">
+                    <span>KEBUDAYAAN NUSANTARA</span>
+                    <span id="loading-pct">0%</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== 2. BERANDA (HOME) ==================== -->
+        <section id="screen-home" class="hidden w-full min-h-screen flex flex-col items-center justify-between p-6 bg-slate-950 relative overflow-hidden batik-bg-overlay">
+            
+            <!-- Parallax Glow Effects -->
+            <div class="absolute inset-0 opacity-30 pointer-events-none">
+                <div class="absolute -top-20 -left-20 w-96 h-96 bg-emerald-600 rounded-full blur-3xl animate-pulse"></div>
+                <div class="absolute top-1/2 -right-20 w-96 h-96 bg-amber-500 rounded-full blur-3xl animate-pulse"></div>
+            </div>
+
+            <!-- Header Title -->
+            <div class="relative z-10 text-center mt-6">
+                <span class="bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 px-4 py-1.5 rounded-full text-xs md:text-sm font-semibold tracking-widest uppercase shadow-md">
+                    GAME EDUKATIF IPS SMP KELAS IX (IX-A – IX-H)
+                </span>
+                <h1 class="text-4xl md:text-6xl font-display font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-amber-400 via-emerald-300 to-teal-300 mt-3 drop-shadow-lg">
+                    KEARIFAN LOKAL DASH
+                </h1>
+                <p class="text-slate-300 italic text-base md:text-lg mt-1 font-medium">
+                    "Run • Think • Answer • Preserve"
+                </p>
+            </div>
+
+            <!-- Wayang Gunungan Central Graphic -->
+            <div class="relative z-10 my-6 flex flex-col items-center">
+                <div class="w-48 h-48 md:w-56 md:h-56 rounded-full bg-gradient-to-br from-emerald-900/40 via-amber-900/30 to-slate-900/80 border-2 border-amber-400/60 flex items-center justify-center p-4 shadow-2xl relative animate-pulse-glow">
+                    
+                    <svg class="w-32 h-32 md:w-40 md:h-40 text-amber-400 animate-float" viewBox="0 0 100 120" fill="currentColor">
+                        <path d="M50 5 L85 60 Q90 85 80 105 L20 105 Q10 85 15 60 Z" fill="url(#wayangGrad)" stroke="#F59E0B" stroke-width="2"/>
+                        <defs>
+                            <linearGradient id="wayangGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+                                <stop offset="0%" stop-color="#F59E0B"/>
+                                <stop offset="50%" stop-color="#D97706"/>
+                                <stop offset="100%" stop-color="#78350F"/>
+                            </linearGradient>
+                        </defs>
+                        <line x1="50" y1="105" x2="50" y2="25" stroke="#FEF3C7" stroke-width="3"/>
+                        <path d="M50 45 Q70 35 75 25 M50 60 Q75 50 80 40 M50 75 Q70 70 75 60" stroke="#FEF3C7" stroke-width="2" fill="none"/>
+                        <path d="M50 45 Q30 35 25 25 M50 60 Q25 50 20 40 M50 75 Q30 70 25 60" stroke="#FEF3C7" stroke-width="2" fill="none"/>
+                        <circle cx="50" cy="20" r="4" fill="#FEF3C7"/>
+                    </svg>
+                </div>
+
+                <div class="mt-4 bg-slate-900/90 backdrop-blur-md px-6 py-2.5 rounded-full border border-amber-500/40 shadow-lg">
+                    <p class="text-amber-300 text-xs md:text-sm font-semibold text-center flex items-center gap-2">
+                        <span>🏛️</span> "Kenali Budayamu, Lestarikan Kearifan Lokal Nusantara!"
+                    </p>
+                </div>
+            </div>
+
+            <!-- Navigation Buttons -->
+            <div class="relative z-10 w-full max-w-md flex flex-col gap-3 mb-6">
+                <button onclick="navTo('screen-register')" class="btn-game w-full py-4 bg-gradient-to-r from-emerald-500 via-teal-600 to-emerald-600 hover:from-emerald-400 hover:to-teal-500 text-white font-display text-xl font-bold rounded-2xl shadow-xl border border-emerald-300/40 flex items-center justify-center gap-3">
+                    <i class="fas fa-play text-amber-300"></i> MULAI PERMAINAN
+                </button>
+                <div class="grid grid-cols-2 gap-3">
+                    <button onclick="navTo('screen-tutorial')" class="btn-game py-3.5 bg-slate-900/90 hover:bg-slate-800 text-slate-200 font-semibold rounded-xl border border-slate-700 flex items-center justify-center gap-2">
+                        <i class="fas fa-book-open text-amber-400"></i> PETUNJUK
+                    </button>
+                    <button onclick="navTo('screen-material')" class="btn-game py-3.5 bg-slate-900/90 hover:bg-slate-800 text-slate-200 font-semibold rounded-xl border border-slate-700 flex items-center justify-center gap-2">
+                        <i class="fas fa-graduation-cap text-teal-400"></i> MATERI
+                    </button>
+                </div>
+                <div class="grid grid-cols-2 gap-3">
+                    <button onclick="showLeaderboardScreen()" class="btn-game py-3 bg-slate-900/80 hover:bg-slate-800 text-slate-300 text-sm font-semibold rounded-xl border border-slate-800 flex items-center justify-center gap-2">
+                        <i class="fas fa-trophy text-amber-400"></i> PAPAN SKOR
+                    </button>
+                    <button onclick="toggleModal('modal-about', true)" class="btn-game py-3 bg-slate-900/80 hover:bg-slate-800 text-slate-300 text-sm font-semibold rounded-xl border border-slate-800 flex items-center justify-center gap-2">
+                        <i class="fas fa-info-circle text-sky-400"></i> TENTANG GAME
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== 3. REGISTRASI PEMAIN (ENHANCED FOR IX-A s/d IX-H) ==================== -->
+        <section id="screen-register" class="hidden w-full min-h-screen flex items-center justify-center p-4 md:p-6 bg-slate-950 relative batik-bg-overlay">
+            <div class="w-full max-w-xl glass-panel p-6 md:p-8 rounded-3xl border border-emerald-500/40 shadow-2xl relative z-10 animate-card-pop">
+                
+                <button onclick="navTo('screen-home')" class="mb-4 text-slate-400 hover:text-white flex items-center gap-2 text-xs md:text-sm">
+                    <i class="fas fa-arrow-left"></i> Kembali ke Beranda
+                </button>
+                
+                <div class="flex items-center justify-between border-b border-slate-800 pb-4 mb-4">
+                    <div>
+                        <h2 class="text-2xl font-display font-bold text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-emerald-400">
+                            REGISTRASI PEJUANG BUDAYA
+                        </h2>
+                        <p class="text-slate-400 text-xs md:text-sm mt-0.5">Pilih kelas kamu dari <strong class="text-amber-300">IX-A hingga IX-H</strong></p>
+                    </div>
+                    <!-- Animated Mini Avatar Badge -->
+                    <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-amber-500/20 to-emerald-500/20 border border-amber-400/50 flex items-center justify-center text-2xl shadow-inner animate-badge-pulse">
+                        🥷
+                    </div>
+                </div>
+
+                <form id="form-register" onsubmit="handleRegistration(event)" class="space-y-4">
+                    
+                    <!-- Player Name Input -->
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-2 flex items-center gap-2">
+                            <i class="fas fa-id-card text-emerald-400"></i> Nama Lengkap Siswa
+                        </label>
+                        <div class="relative">
+                            <span class="absolute inset-y-0 left-0 pl-3.5 flex items-center text-slate-500"><i class="fas fa-user"></i></span>
+                            <input type="text" id="reg-name" required placeholder="Contoh: Budi Pratama" oninput="updateLivePreview()" class="w-full pl-10 pr-4 py-3 rounded-xl bg-slate-900/90 border border-slate-700 text-slate-100 placeholder-slate-500 focus:outline-none focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/30 transition">
+                        </div>
+                    </div>
+
+                    <!-- Interactive Class Selection (IX-A to IX-H) Grid -->
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-2 flex items-center justify-between">
+                            <span class="flex items-center gap-2"><i class="fas fa-school text-amber-400"></i> Pilih Kelas (IX-A s/d IX-H)</span>
+                            <span id="selected-class-label" class="text-amber-400 font-bold font-mono">IX-A</span>
+                        </label>
+                        
+                        <input type="hidden" id="reg-class" value="IX-A">
+                        <div class="grid grid-cols-4 gap-2">
+                            <button type="button" onclick="selectClassBadge('IX-A')" id="badge-IX-A" class="class-badge-btn selected py-2.5 px-3 rounded-xl border border-slate-700 font-bold text-xs flex flex-col items-center justify-center gap-1 hover:border-emerald-400">
+                                <span>🏫</span> IX-A
+                            </button>
+                            <button type="button" onclick="selectClassBadge('IX-B')" id="badge-IX-B" class="class-badge-btn py-2.5 px-3 bg-slate-900/80 rounded-xl border border-slate-700 font-bold text-xs flex flex-col items-center justify-center gap-1 hover:border-emerald-400">
+                                <span>🎨</span> IX-B
+                            </button>
+                            <button type="button" onclick="selectClassBadge('IX-C')" id="badge-IX-C" class="class-badge-btn py-2.5 px-3 bg-slate-900/80 rounded-xl border border-slate-700 font-bold text-xs flex flex-col items-center justify-center gap-1 hover:border-emerald-400">
+                                <span>⚡</span> IX-C
+                            </button>
+                            <button type="button" onclick="selectClassBadge('IX-D')" id="badge-IX-D" class="class-badge-btn py-2.5 px-3 bg-slate-900/80 rounded-xl border border-slate-700 font-bold text-xs flex flex-col items-center justify-center gap-1 hover:border-emerald-400">
+                                <span>🔥</span> IX-D
+                            </button>
+                            <button type="button" onclick="selectClassBadge('IX-E')" id="badge-IX-E" class="class-badge-btn py-2.5 px-3 bg-slate-900/80 rounded-xl border border-slate-700 font-bold text-xs flex flex-col items-center justify-center gap-1 hover:border-emerald-400">
+                                <span>🌟</span> IX-E
+                            </button>
+                            <button type="button" onclick="selectClassBadge('IX-F')" id="badge-IX-F" class="class-badge-btn py-2.5 px-3 bg-slate-900/80 rounded-xl border border-slate-700 font-bold text-xs flex flex-col items-center justify-center gap-1 hover:border-emerald-400">
+                                <span>🚀</span> IX-F
+                            </button>
+                            <button type="button" onclick="selectClassBadge('IX-G')" id="badge-IX-G" class="class-badge-btn py-2.5 px-3 bg-slate-900/80 rounded-xl border border-slate-700 font-bold text-xs flex flex-col items-center justify-center gap-1 hover:border-emerald-400">
+                                <span>💎</span> IX-G
+                            </button>
+                            <button type="button" onclick="selectClassBadge('IX-H')" id="badge-IX-H" class="class-badge-btn py-2.5 px-3 bg-slate-900/80 rounded-xl border border-slate-700 font-bold text-xs flex flex-col items-center justify-center gap-1 hover:border-emerald-400">
+                                <span>👑</span> IX-H
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Attendance Number Input -->
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-2 flex items-center gap-2">
+                            <i class="fas fa-[#059669] fa-list-ol text-teal-400"></i> Nomor Absen
+                        </label>
+                        <input type="number" id="reg-no" required min="1" max="50" placeholder="Contoh: 15" oninput="updateLivePreview()" class="w-full px-4 py-3 rounded-xl bg-slate-900/90 border border-slate-700 text-slate-100 focus:outline-none focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/30 transition">
+                    </div>
+
+                    <!-- Dynamic Live Preview Card -->
+                    <div class="bg-gradient-to-r from-slate-900 via-slate-900/90 to-emerald-950/40 p-3.5 rounded-2xl border border-emerald-500/30 flex items-center justify-between">
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 rounded-full bg-emerald-500/20 border border-emerald-400 flex items-center justify-center text-lg">
+                                🏃
+                            </div>
+                            <div>
+                                <div class="text-[10px] text-slate-400 uppercase tracking-wider">Kartu Pelestari Budaya</div>
+                                <div id="preview-name" class="font-bold text-slate-100 text-sm">Budi Pratama</div>
+                            </div>
+                        </div>
+                        <div class="text-right">
+                            <span id="preview-badge" class="px-2.5 py-1 rounded-full text-xs font-bold font-mono bg-amber-500/20 border border-amber-400/40 text-amber-300">
+                                KELAS IX-A • ABSEN 15
+                            </span>
+                        </div>
+                    </div>
+
+                    <div id="reg-error" class="hidden p-3 bg-rose-900/40 border border-rose-500/50 rounded-xl text-rose-300 text-xs text-center font-medium animate-pulse">
+                        Isi nama lengkap dan nomor absen kamu terlebih dahulu!
+                    </div>
+
+                    <button type="submit" class="btn-game w-full mt-4 py-4 bg-gradient-to-r from-amber-500 via-emerald-500 to-teal-500 text-slate-950 font-display text-lg font-bold rounded-2xl shadow-xl flex items-center justify-center gap-2">
+                        🚀 MULAI PETUALANGAN RUNNER
+                    </button>
+                </form>
+            </div>
+        </section>
+
+        <!-- ==================== 4. PETUNJUK PERMAINAN ==================== -->
+        <section id="screen-tutorial" class="hidden w-full min-h-screen flex flex-col justify-between items-center p-6 bg-slate-950 batik-bg-overlay">
+            <div class="w-full max-w-2xl">
+                <div class="flex items-center justify-between mb-6">
+                    <button onclick="navTo('screen-home')" class="text-slate-400 hover:text-white flex items-center gap-2 text-sm">
+                        <i class="fas fa-arrow-left"></i> Beranda
+                    </button>
+                    <h2 class="text-2xl font-display font-bold text-amber-400">PETUNJUK PERMAINAN</h2>
+                </div>
+
+                <!-- Tutorial Cards Grid -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+                    <div class="bg-slate-900/80 p-4 rounded-2xl border border-slate-800 flex gap-4 items-start">
+                        <div class="w-10 h-10 rounded-xl bg-emerald-500/20 border border-emerald-500/40 flex items-center justify-center text-emerald-400 font-bold shrink-0">🏃</div>
+                        <div>
+                            <h4 class="font-bold text-amber-300 text-sm mb-1">KARAKTER BERLARI</h4>
+                            <p class="text-xs text-slate-300">Karakter kamu akan terus berlari secara otomatis menjelajahi 4 Zona Kebudayaan Nusantara.</p>
+                        </div>
+                    </div>
+                    <div class="bg-slate-900/80 p-4 rounded-2xl border border-slate-800 flex gap-4 items-start">
+                        <div class="w-10 h-10 rounded-xl bg-amber-500/20 border border-amber-500/40 flex items-center justify-center text-amber-400 font-bold shrink-0">🎯</div>
+                        <div>
+                            <h4 class="font-bold text-amber-300 text-sm mb-1">PILIH JAWABAN TEPAT</h4>
+                            <p class="text-xs text-slate-300">Pilih opsi jawaban di lintasan sebelum karakter melewati batas waktu!</p>
+                        </div>
+                    </div>
+                    <div class="bg-slate-900/80 p-4 rounded-2xl border border-slate-800 flex gap-4 items-start">
+                        <div class="w-10 h-10 rounded-xl bg-sky-500/20 border border-sky-500/40 flex items-center justify-center text-sky-400 font-bold shrink-0">⏱️</div>
+                        <div>
+                            <h4 class="font-bold text-amber-300 text-sm mb-1">BATAS WAKTU 15 DETIK</h4>
+                            <p class="text-xs text-slate-300">Setiap soal memiliki timer 15 detik. Jawab lebih cepat untuk bonus poin tinggi!</p>
+                        </div>
+                    </div>
+                    <div class="bg-slate-900/80 p-4 rounded-2xl border border-slate-800 flex gap-4 items-start">
+                        <div class="w-10 h-10 rounded-xl bg-rose-500/20 border border-rose-500/40 flex items-center justify-center text-rose-400 font-bold shrink-0">❤️</div>
+                        <div>
+                            <h4 class="font-bold text-amber-300 text-sm mb-1">3 NYAWA & COMBO</h4>
+                            <p class="text-xs text-slate-300">Salah menjawab mengurangi 1 nyawa. Jawaban benar beruntun mengaktifkan COMBO x2, x3, dst!</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Mini Preview Box -->
+                <div class="bg-slate-900/90 p-4 rounded-2xl border border-emerald-500/30 text-center">
+                    <span class="text-xs font-semibold text-emerald-400 uppercase tracking-widest block mb-2">Simbol Bonus Di Lintasan Runner</span>
+                    <div class="flex justify-around text-xs text-slate-300">
+                        <div class="flex flex-col items-center gap-1">
+                            <span class="text-xl">🪙</span>
+                            <span>Koin Batik (+25 Poin)</span>
+                        </div>
+                        <div class="flex flex-col items-center gap-1">
+                            <span class="text-xl">⭐</span>
+                            <span>Bintang Wayang (+50 Poin)</span>
+                        </div>
+                        <div class="flex flex-col items-center gap-1">
+                            <span class="text-xl">⚡</span>
+                            <span>Petir Megamendung (+5 Detik)</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <button onclick="navTo('screen-register')" class="btn-game w-full max-w-md py-4 mt-6 bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-display text-lg font-bold rounded-2xl shadow-xl">
+                SIAP, MULAI! 🚀
+            </button>
+        </section>
+
+        <!-- ==================== 5. MATERI SINGKAT ==================== -->
+        <section id="screen-material" class="hidden w-full min-h-screen flex flex-col justify-between items-center p-6 bg-slate-950 batik-bg-overlay">
+            <div class="w-full max-w-3xl">
+                <div class="flex items-center justify-between mb-6">
+                    <button onclick="navTo('screen-home')" class="text-slate-400 hover:text-white flex items-center gap-2 text-sm">
+                        <i class="fas fa-arrow-left"></i> Beranda
+                    </button>
+                    <h2 class="text-2xl font-display font-bold text-emerald-400">RANGKUMAN MATERI KEARIFAN LOKAL</h2>
+                </div>
+
+                <!-- Tabs -->
+                <div class="flex overflow-x-auto gap-2 mb-4 pb-2 scrollbar-none">
+                    <button onclick="switchTab('tab-konsep')" id="btn-tab-konsep" class="tab-btn px-4 py-2 rounded-xl text-xs font-bold bg-emerald-600 text-white shrink-0">A. Konsep</button>
+                    <button onclick="switchTab('tab-bentuk')" id="btn-tab-bentuk" class="tab-btn px-4 py-2 rounded-xl text-xs font-bold bg-slate-800 text-slate-400 shrink-0">B. Bentuk-Bentuk</button>
+                    <button onclick="switchTab('tab-fungsi')" id="btn-tab-fungsi" class="tab-btn px-4 py-2 rounded-xl text-xs font-bold bg-slate-800 text-slate-400 shrink-0">C. Fungsi</button>
+                    <button onclick="switchTab('tab-pelestarian')" id="btn-tab-pelestarian" class="tab-btn px-4 py-2 rounded-xl text-xs font-bold bg-slate-800 text-slate-400 shrink-0">D. Pelestarian</button>
+                </div>
+
+                <!-- Tab Contents -->
+                <div class="glass-panel p-6 rounded-2xl border border-slate-700 min-h-[300px] text-sm leading-relaxed">
+                    <!-- Tab A -->
+                    <div id="tab-konsep" class="tab-content space-y-4">
+                        <h3 class="text-lg font-bold text-amber-400 flex items-center gap-2">
+                            <i class="fas fa-lightbulb"></i> A. Konsep Kearifan Lokal
+                        </h3>
+                        <p class="text-slate-200">
+                            <strong>Kearifan Lokal (*Local Wisdom*)</strong> merupakan gagasan, nilai-nilai, pandangan setempat, norma, dan kebiasaan yang bersifat bijaksana, penuh kearifan, bernilai baik, yang tertanam dan diikuti oleh anggota masyarakat secara turun-temurun.
+                        </p>
+                        <div class="bg-slate-900/80 p-4 rounded-xl border border-slate-800">
+                            <h4 class="font-bold text-emerald-400 mb-2">Ciri-Ciri Utama:</h4>
+                            <ul class="list-disc list-inside space-y-1 text-slate-300">
+                                <li>Mampu bertahan terhadap budaya luar.</li>
+                                <li>Memiliki kemampuan mengakomodasi unsur-unsur budaya luar.</li>
+                                <li>Mempunyai kemampuan mengintegrasikan unsur budaya luar ke dalam budaya asli.</li>
+                                <li>Mempunyai kemampuan mengendalikan dan memberi arah pada perkembangan budaya.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Tab B -->
+                    <div id="tab-bentuk" class="tab-content hidden space-y-4">
+                        <h3 class="text-lg font-bold text-amber-400 flex items-center gap-2">
+                            <i class="fas fa-shapes"></i> B. Bentuk-Bentuk Kearifan Lokal
+                        </h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-xs">
+                            <div class="bg-slate-900/80 p-3 rounded-xl border border-slate-800">
+                                <span class="font-bold text-emerald-400 block mb-1">🏡 Wujud Nyata (Tangible)</span>
+                                <p class="text-slate-300">Rumah adat (Tongkonan, Joglo, Gadang), pakaian adat, bangunan candi, karya seni, batik, dan senjata tradisional.</p>
+                            </div>
+                            <div class="bg-slate-900/80 p-3 rounded-xl border border-slate-800">
+                                <span class="font-bold text-teal-400 block mb-1">🗣️ Tidak Berwujud (Intangible)</span>
+                                <p class="text-slate-300">Nasihat oral, petuah, cerita rakyat, nyanyian daerah, sistem kepercayaan, dan kebiasaan gotong royong.</p>
+                            </div>
+                            <div class="bg-slate-900/80 p-3 rounded-xl border border-slate-800">
+                                <span class="font-bold text-amber-400 block mb-1">🌾 Pengetahuan Lokal</span>
+                                <p class="text-slate-300">Sistem Subak di Bali (irigasi pertanian), Pranata Mangsa di Jawa (sistem penanggalan musim).</p>
+                            </div>
+                            <div class="bg-slate-900/80 p-3 rounded-xl border border-slate-800">
+                                <span class="font-bold text-rose-400 block mb-1">🌿 Konservasi Lingkungan</span>
+                                <p class="text-slate-300">Hutan Larangan Adat (Baduy/Riau), Sasi di Maluku (larangan mengambil hasil laut tertentu).</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Tab C -->
+                    <div id="tab-fungsi" class="tab-content hidden space-y-4">
+                        <h3 class="text-lg font-bold text-amber-400 flex items-center gap-2">
+                            <i class="fas fa-cog"></i> C. Fungsi Kearifan Lokal
+                        </h3>
+                        <ul class="space-y-2 text-slate-300">
+                            <li class="flex items-start gap-2">
+                                <span class="text-emerald-400">✔️</span>
+                                <div><strong>Pengembangan SDM:</strong> Membentuk karakter bijak dan berbudi pekerti luhur.</div>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <span class="text-emerald-400">✔️</span>
+                                <div><strong>Konservasi SDA:</strong> Membatasi pemanfaatan alam secara berlebihan agar tetap lestari.</div>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <span class="text-emerald-400">✔️</span>
+                                <div><strong>Pengembangan Kebudayaan:</strong> Menjadi landasan inovasi berbasis identitas bangsa.</div>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <span class="text-emerald-400">✔️</span>
+                                <div><strong>Integrasi Sosial & Solidaritas:</strong> Mengikat persatuan warga lewat gotong royong dan musyawarah.</div>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Tab D -->
+                    <div id="tab-pelestarian" class="tab-content hidden space-y-4">
+                        <h3 class="text-lg font-bold text-amber-400 flex items-center gap-2">
+                            <i class="fas fa-shield-alt"></i> D. Cara Menjaga & Melestarikan
+                        </h3>
+                        <div class="bg-slate-900/80 p-4 rounded-xl border border-emerald-500/30 text-slate-200 space-y-2">
+                            <p>1. <strong>Mempelajari & Mengenal:</strong> Aktif mencari tahu sejarah dan nilai di balik tradisi lokal.</p>
+                            <p>2. <strong>Pemanfaatan Teknologi:</strong> Mempromosikan kebudayaan lewat konten kreatif digital.</p>
+                            <p>3. <strong>Menggunakan Produk Lokal:</strong> Bangga memakai batik, kuliner Nusantara, dan bahasa daerah.</p>
+                            <p>4. <strong>Menghargai Keberagaman:</strong> Menghormati adat istiadat suku dan daerah lain di Indonesia.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <button onclick="navTo('screen-register')" class="btn-game w-full max-w-md py-4 mt-6 bg-gradient-to-r from-emerald-500 to-amber-500 text-slate-950 font-display text-lg font-bold rounded-2xl shadow-xl">
+                SIAP BERLARI & MENJAWAB! 🏃
+            </button>
+        </section>
+
+        <!-- ==================== 6. GAMEPLAY MAIN CANVAS & SCREEN ==================== -->
+        <section id="screen-game" class="hidden w-full min-h-screen flex flex-col items-center justify-between p-2 md:p-4 bg-slate-950 relative overflow-hidden select-none">
+            
+            <!-- HUD TOP BAR -->
+            <div class="w-full max-w-4xl glass-panel p-3 rounded-2xl flex items-center justify-between z-20 mb-2 border border-slate-700">
+                <!-- Player Info -->
+                <div class="flex items-center gap-2">
+                    <div class="w-9 h-9 rounded-full bg-emerald-500/20 border border-emerald-400 flex items-center justify-center text-emerald-300 font-bold text-xs">
+                        🏃
+                    </div>
+                    <div>
+                        <div id="hud-name" class="font-bold text-slate-100 text-xs md:text-sm">Pemain</div>
+                        <div id="hud-zone" class="text-[10px] text-amber-400 font-semibold uppercase">ZONA 1: DESA & SAWAH SUBAK</div>
+                    </div>
+                </div>
+
+                <!-- Timer & Hearts -->
+                <div class="flex items-center gap-4">
+                    <div class="flex items-center gap-1.5 bg-slate-900 px-3 py-1.5 rounded-xl border border-amber-500/40">
+                        <i class="fas fa-clock text-amber-400 text-sm"></i>
+                        <span id="hud-timer" class="font-mono text-lg font-bold text-amber-300">15</span>
+                    </div>
+                    <div id="hud-lives" class="flex gap-1 text-rose-500 text-base md:text-lg">
+                        <i class="fas fa-heart"></i>
+                        <i class="fas fa-heart"></i>
+                        <i class="fas fa-heart"></i>
+                    </div>
+                </div>
+
+                <!-- Score & Combo -->
+                <div class="text-right">
+                    <div class="text-[10px] text-slate-400 uppercase font-semibold">Skor</div>
+                    <div id="hud-score" class="font-mono text-xl font-extrabold text-emerald-400">0</div>
+                    <div id="hud-combo" class="text-[10px] font-bold text-amber-400 opacity-0 transition">COMBO x2!</div>
+                </div>
+            </div>
+
+            <!-- CANVAS 2D ANIMATED RUNNER AREA -->
+            <div class="w-full max-w-4xl relative rounded-2xl overflow-hidden border-2 border-slate-700 bg-slate-900 shadow-2xl flex-1 max-h-[260px] md:max-h-[320px] mb-2">
+                <canvas id="game-canvas" class="w-full h-full block"></canvas>
+
+                <!-- Floating Question Overlay Banner -->
+                <div id="question-banner" class="absolute top-2 left-2 right-2 glass-panel p-3 rounded-xl border border-amber-500/40 shadow-xl transition-all duration-300 transform">
+                    <div class="flex justify-between items-center mb-1">
+                        <span id="q-category" class="text-[10px] font-bold bg-amber-500/20 text-amber-300 border border-amber-500/30 px-2.5 py-0.5 rounded-full uppercase">
+                            KONSEP KEARIFAN LOKAL
+                        </span>
+                        <span id="q-number" class="text-xs text-slate-400 font-mono">Soal 1 / 15</span>
+                    </div>
+                    <h3 id="q-text" class="text-xs md:text-base font-bold text-slate-100 leading-snug">
+                        Memuat pertanyaan runner...
+                    </h3>
+                </div>
+
+                <!-- Combo Popup Animation Overlay -->
+                <div id="combo-popup" class="pointer-events-none absolute inset-0 flex items-center justify-center opacity-0 transition duration-300 transform scale-50">
+                    <span class="text-3xl md:text-5xl font-display font-black text-transparent bg-clip-text bg-gradient-to-r from-amber-300 via-rose-400 to-emerald-300 drop-shadow-[0_5px_5px_rgba(0,0,0,0.8)]">
+                        COMBO x3! 🔥
+                    </span>
+                </div>
+            </div>
+
+            <!-- INTERACTIVE ANSWER BUTTONS -->
+            <div class="w-full max-w-4xl grid grid-cols-1 md:grid-cols-3 gap-2 z-20">
+                <button onclick="submitAnswer(0)" id="opt-btn-0" class="btn-game group relative p-3 md:p-4 bg-slate-900 hover:bg-slate-800 border-2 border-slate-700 hover:border-emerald-500 rounded-xl text-left transition flex items-start gap-3">
+                    <span class="w-7 h-7 rounded-lg bg-emerald-500/20 border border-emerald-500/40 text-emerald-400 font-bold text-xs flex items-center justify-center shrink-0 group-hover:bg-emerald-500 group-hover:text-slate-950 transition">A</span>
+                    <span id="opt-text-0" class="text-xs md:text-sm text-slate-200 font-medium">Opsi A</span>
+                </button>
+                <button onclick="submitAnswer(1)" id="opt-btn-1" class="btn-game group relative p-3 md:p-4 bg-slate-900 hover:bg-slate-800 border-2 border-slate-700 hover:border-amber-500 rounded-xl text-left transition flex items-start gap-3">
+                    <span class="w-7 h-7 rounded-lg bg-amber-500/20 border border-amber-500/40 text-amber-400 font-bold text-xs flex items-center justify-center shrink-0 group-hover:bg-amber-500 group-hover:text-slate-950 transition">B</span>
+                    <span id="opt-text-1" class="text-xs md:text-sm text-slate-200 font-medium">Opsi B</span>
+                </button>
+                <button onclick="submitAnswer(2)" id="opt-btn-2" class="btn-game group relative p-3 md:p-4 bg-slate-900 hover:bg-slate-800 border-2 border-slate-700 hover:border-teal-500 rounded-xl text-left transition flex items-start gap-3">
+                    <span class="w-7 h-7 rounded-lg bg-teal-500/20 border border-teal-500/40 text-teal-400 font-bold text-xs flex items-center justify-center shrink-0 group-hover:bg-teal-500 group-hover:text-slate-950 transition">C</span>
+                    <span id="opt-text-2" class="text-xs md:text-sm text-slate-200 font-medium">Opsi C</span>
+                </button>
+            </div>
+        </section>
+
+        <!-- ==================== 7. HASIL PERMAINAN ==================== -->
+        <section id="screen-result" class="hidden w-full min-h-screen flex items-center justify-center p-6 bg-slate-950 batik-bg-overlay">
+            <div class="w-full max-w-xl glass-panel p-6 md:p-8 rounded-3xl border border-emerald-500/30 text-center relative z-10 shadow-2xl">
+                <span class="text-xs font-semibold text-emerald-400 uppercase tracking-widest block mb-1">TERIMA KASIH, LOCAL HERO!</span>
+                <h2 id="res-title" class="text-3xl md:text-4xl font-display font-extrabold text-amber-400 mb-2">🎉 PETUALANGAN SELESAI!</h2>
+                
+                <div class="my-4 inline-block px-6 py-2 rounded-full bg-gradient-to-r from-amber-500 via-emerald-500 to-teal-500 text-slate-950 font-display font-extrabold text-lg shadow-lg" id="res-badge">
+                    PELESTARI BUDAYA
+                </div>
+
+                <p id="res-quote" class="text-xs md:text-sm text-slate-300 italic mb-6">
+                    "Kamu telah berlari, berpikir, dan belajar tentang kearifan lokal Indonesia."
+                </p>
+
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-3 text-left mb-6">
+                    <div class="bg-slate-900/80 p-3 rounded-2xl border border-slate-800">
+                        <span class="text-[10px] text-slate-400 uppercase block">Total Skor</span>
+                        <span id="res-score" class="text-xl font-bold font-mono text-emerald-400">0</span>
+                    </div>
+                    <div class="bg-slate-900/80 p-3 rounded-2xl border border-slate-800">
+                        <span class="text-[10px] text-slate-400 uppercase block">Akurasi</span>
+                        <span id="res-acc" class="text-xl font-bold font-mono text-amber-400">0%</span>
+                    </div>
+                    <div class="bg-slate-900/80 p-3 rounded-2xl border border-slate-800">
+                        <span class="text-[10px] text-slate-400 uppercase block">Benar / Salah</span>
+                        <span id="res-correct-wrong" class="text-sm font-bold font-mono text-teal-300">0 / 0</span>
+                    </div>
+                    <div class="bg-slate-900/80 p-3 rounded-2xl border border-slate-800">
+                        <span class="text-[10px] text-slate-400 uppercase block">Max Combo</span>
+                        <span id="res-max-combo" class="text-xl font-bold font-mono text-rose-400">x0</span>
+                    </div>
+                </div>
+
+                <div class="flex flex-col md:flex-row gap-3">
+                    <button onclick="startGame()" class="btn-game flex-1 py-3.5 bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-display font-bold rounded-xl flex items-center justify-center gap-2">
+                        <i class="fas fa-redo"></i> MAIN LAGI
+                    </button>
+                    <button onclick="renderReviewScreen()" class="btn-game flex-1 py-3.5 bg-amber-500 hover:bg-amber-400 text-slate-950 font-display font-bold rounded-xl flex items-center justify-center gap-2">
+                        <i class="fas fa-list-check"></i> PEMBAHASAN
+                    </button>
+                    <button onclick="navTo('screen-home')" class="btn-game p-3.5 bg-slate-800 hover:bg-slate-700 text-slate-200 rounded-xl">
+                        <i class="fas fa-home"></i>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== 8. PAPAN SKOR (LEADERBOARD) ==================== -->
+        <section id="screen-leaderboard" class="hidden w-full min-h-screen flex flex-col justify-between items-center p-6 bg-slate-950 batik-bg-overlay">
+            <div class="w-full max-w-2xl">
+                <div class="flex items-center justify-between mb-6">
+                    <button onclick="navTo('screen-home')" class="text-slate-400 hover:text-white flex items-center gap-2 text-sm">
+                        <i class="fas fa-arrow-left"></i> Beranda
+                    </button>
+                    <h2 class="text-2xl font-display font-bold text-amber-400 flex items-center gap-2">
+                        <i class="fas fa-trophy"></i> PAPAN SKOR LOCAL HERO
+                    </h2>
+                </div>
+
+                <div class="glass-panel rounded-2xl border border-slate-800 overflow-hidden shadow-2xl">
+                    <div class="grid grid-cols-12 bg-slate-900/90 px-4 py-3 text-xs font-semibold text-slate-400 border-b border-slate-800">
+                        <div class="col-span-2 text-center">RANK</div>
+                        <div class="col-span-5">NAMA PEMAIN</div>
+                        <div class="col-span-2">KELAS</div>
+                        <div class="col-span-3 text-right">SKOR</div>
+                    </div>
+                    <div id="leaderboard-list" class="divide-y divide-slate-800/50 max-h-[350px] overflow-y-auto">
+                    </div>
+                </div>
+            </div>
+
+            <div class="w-full max-w-md flex gap-3 mt-6">
+                <button onclick="startGame()" class="btn-game flex-1 py-3.5 bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-display font-bold rounded-xl">
+                    🔄 MAIN LAGI
+                </button>
+                <button onclick="navTo('screen-home')" class="btn-game flex-1 py-3.5 bg-slate-800 hover:bg-slate-700 text-slate-200 font-semibold rounded-xl">
+                    🏠 BERANDA
+                </button>
+            </div>
+        </section>
+
+        <!-- ==================== 9. UMPAN BALIK & PEMBAHASAN ==================== -->
+        <section id="screen-review" class="hidden w-full min-h-screen flex flex-col justify-between items-center p-6 bg-slate-950 batik-bg-overlay">
+            <div class="w-full max-w-3xl">
+                <div class="flex items-center justify-between mb-6">
+                    <button onclick="navTo('screen-result')" class="text-slate-400 hover:text-white flex items-center gap-2 text-sm">
+                        <i class="fas fa-arrow-left"></i> Hasil Game
+                    </button>
+                    <h2 class="text-2xl font-display font-bold text-emerald-400">PEMBAHASAN SOAL</h2>
+                </div>
+
+                <div class="glass-panel p-5 rounded-2xl border border-slate-700 mb-6 shadow-xl">
+                    <h3 class="text-sm font-bold text-amber-400 uppercase tracking-wider mb-3">Analisis Penguasaan Materi</h3>
+                    <div id="mastery-bars" class="space-y-3">
+                    </div>
+                    <div id="mastery-recommendation" class="mt-4 p-3 bg-slate-900/80 rounded-xl border border-emerald-500/30 text-xs text-slate-300 italic">
+                        "Rekomendasi Belajar: Pelajari kembali..."
+                    </div>
+                </div>
+
+                <div id="review-list" class="space-y-4 max-h-[400px] overflow-y-auto pr-2">
+                </div>
+            </div>
+
+            <div class="w-full max-w-md flex gap-3 mt-6">
+                <button onclick="startGame()" class="btn-game flex-1 py-3.5 bg-emerald-500 text-slate-950 font-display font-bold rounded-xl">
+                    🔄 COBA LAGI
+                </button>
+                <button onclick="navTo('screen-home')" class="btn-game flex-1 py-3.5 bg-slate-800 text-slate-200 font-semibold rounded-xl">
+                    🏠 BERANDA
+                </button>
+            </div>
+        </section>
+
+        <!-- MODAL: ABOUT GAME -->
+        <div id="modal-about" class="fixed inset-0 bg-slate-950/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+            <div class="bg-slate-900 border border-amber-500/40 p-6 rounded-3xl max-w-md w-full relative shadow-2xl">
+                <button onclick="toggleModal('modal-about', false)" class="absolute top-4 right-4 text-slate-400 hover:text-white">
+                    <i class="fas fa-times text-lg"></i>
+                </button>
+                <h3 class="text-xl font-display font-bold text-amber-400 mb-2">TENTANG GAME</h3>
+                <p class="text-xs text-slate-300 leading-relaxed mb-4">
+                    <strong>KEARIFAN LOKAL DASH: IX-A s/d IX-H EDITION</strong> merupakan game edukatif IPS interaktif yang dirancang khusus untuk siswa SMP Kelas IX. Game ini menggabungkan simulasi runner 2D dengan kebudayaan dan norma pelestarian Nusantara.
+                </p>
+                <div class="bg-slate-950 p-3 rounded-xl border border-slate-800 text-xs text-slate-400 space-y-1 mb-4">
+                    <div>🌱 <strong>Kenali:</strong> Memahami identitas & bentuk budaya.</div>
+                    <div>🤝 <strong>Hargai:</strong> Menghormati perbedaan kebiasaan daerah.</div>
+                    <div>❤️ <strong>Lestarikan:</strong> Menjaga keberlanjutan kearifan lokal.</div>
+                </div>
+                <button onclick="toggleModal('modal-about', false)" class="w-full py-3 bg-emerald-500 text-slate-950 font-bold rounded-xl text-sm">
+                    Tutup
+                </button>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        // Web Audio API Audio Synthesizer System
+        class AudioSystem {
+            constructor() {
+                this.ctx = null;
+                this.soundEnabled = true;
+                this.musicEnabled = true;
+            }
+
+            init() {
+                if (!this.ctx) {
+                    const AudioCtx = window.AudioContext || window.webkitAudioContext;
+                    this.ctx = new AudioCtx();
+                }
+            }
+
+            playTone(freq, type = 'sine', duration = 0.1, gainVal = 0.1) {
+                if (!this.soundEnabled) return;
+                this.init();
+                try {
+                    const osc = this.ctx.createOscillator();
+                    const gain = this.ctx.createGain();
+                    osc.type = type;
+                    osc.frequency.setValueAtTime(freq, this.ctx.currentTime);
+                    gain.gain.setValueAtTime(gainVal, this.ctx.currentTime);
+                    gain.gain.exponentialRampToValueAtTime(0.0001, this.ctx.currentTime + duration);
+                    osc.connect(gain);
+                    gain.connect(this.ctx.destination);
+                    osc.start();
+                    osc.stop(this.ctx.currentTime + duration);
+                } catch (e) {}
+            }
+
+            playClick() { this.playTone(600, 'sine', 0.05, 0.1); }
+            playCorrect() {
+                this.playTone(523.25, 'triangle', 0.1, 0.15); // C5
+                setTimeout(() => this.playTone(659.25, 'triangle', 0.1, 0.15), 100); // E5
+                setTimeout(() => this.playTone(783.99, 'triangle', 0.2, 0.2), 200); // G5
+            }
+            playWrong() {
+                this.playTone(200, 'sawtooth', 0.15, 0.2);
+                setTimeout(() => this.playTone(150, 'sawtooth', 0.25, 0.2), 120);
+            }
+            playCoin() {
+                this.playTone(987.77, 'sine', 0.08, 0.15);
+                setTimeout(() => this.playTone(1318.51, 'sine', 0.15, 0.15), 80);
+            }
+            playCombo() {
+                [440, 554.37, 659.25, 880].forEach((freq, idx) => {
+                    setTimeout(() => this.playTone(freq, 'triangle', 0.12, 0.15), idx * 80);
+                });
+            }
+
+            toggleSound() {
+                this.soundEnabled = !this.soundEnabled;
+                document.getElementById('sound-icon').className = this.soundEnabled ? 'fas fa-volume-up text-lg' : 'fas fa-volume-mute text-lg text-slate-500';
+            }
+
+            toggleMusic() {
+                this.musicEnabled = !this.musicEnabled;
+                document.getElementById('music-icon').className = this.musicEnabled ? 'fas fa-music text-lg' : 'fas fa-volume-mute text-lg text-slate-500';
+            }
+        }
+
+        const gameAudio = new AudioSystem();
+
+        const QUESTION_BANK = [
+            // Konsep Kearifan Lokal
+            { question: "Kearifan lokal pada dasarnya merupakan...", options: ["Gagasan, nilai, dan kebiasaan bijaksana yang diwariskan antargenerasi.", "Semua budaya asing yang diserap tanpa penyaringan.", "Teknologi modern yang diciptakan di perkotaan."], answer: 0, category: "Konsep Kearifan Lokal", explanation: "Kearifan lokal merupakan pengetahuan, norma, dan praktik bijaksana setempat yang diwariskan dari generasi ke generasi." },
+            { question: "Berikut ini yang BUKAN merupakan ciri dari kearifan lokal adalah...", options: ["Mampu bertahan dari pengaruh budaya luar.", "Mudah tergerus dan hilang akibat modernisasi.", "Mempunyai kemampuan mengendalikan budaya luar."], answer: 1, category: "Konsep Kearifan Lokal", explanation: "Kearifan lokal justru memiliki daya tahan terhadap pengaruh budaya luar serta mampu menyaringnya." },
+            { question: "Kearifan lokal terbentuk melalui proses...", options: ["Keputusan sepihak dari pemerintah pusat.", "Pengalaman panjang masyarakat dalam berinteraksi dengan lingkungannya.", "Pengaruh instalasi budaya asing secara mendadak."], answer: 1, category: "Konsep Kearifan Lokal", explanation: "Kearifan lokal lahir dari pengalaman kolektif masyarakat setempat yang berlangsung secara bertahap dan lama." },
+            { question: "Sifat utama kearifan lokal yang menjadikannya pedoman hidup adalah...", options: ["Bernilai baik, bijaksana, dan memuat norma lokal.", "Bersifat tertutup dan menolak perdagangan.", "Hanya berlaku untuk kelompok kaya."], answer: 0, category: "Konsep Kearifan Lokal", explanation: "Kearifan lokal berisi norma-norma luhur yang membimbing perilaku masyarakat agar harmonis." },
+            { question: "Apakah kearifan lokal dapat dinamis mengikuti perkembangan zaman?", options: ["Ya, selama tidak merusak nilai luhur intinya.", "Tidak, kearifan lokal harus kaku dan tidak boleh berubah.", "Hanya jika disetujui negara luar."], answer: 0, category: "Konsep Kearifan Lokal", explanation: "Kearifan lokal bersifat adaptif dan dapat mengakomodasi inovasi tanpa mengorbankan nilai dasar." },
+            { question: "Siapakah pemilik utama dari kearifan lokal?", options: ["Masyarakat adat/lokal tempat kebudayaan berkembang.", "Perusahaan multinasional.", "Wisatawan asing."], answer: 0, category: "Konsep Kearifan Lokal", explanation: "Masyarakat lokal adalah pemilik dan penjaga utama tradisi serta pengetahuan setempat." },
+            { question: "Istilah 'Local Wisdom' dalam bahasa Indonesia diterjemahkan menjadi...", options: ["Kearifan Lokal", "Pengetahuan Internasional", "Teknologi Terapan"], answer: 0, category: "Konsep Kearifan Lokal", explanation: "Local Wisdom berarti kearifan atau pandangan hidup bijaksana berbasis lokalitas." },
+
+            // Bentuk Kearifan Lokal
+            { question: "Sistem irigasi pertanian tradisional masyarakat Bali yang sarat gotong royong disebut...", options: ["Subak", "Pranata Mangsa", "Sasi"], answer: 0, category: "Bentuk Kearifan Lokal", explanation: "Subak adalah organisasi kearifan lokal pengelolaan air irigasi di Bali yang diakui UNESCO." },
+            { question: "Tradisi Sasi di Maluku merupakan bentuk kearifan lokal dalam hal...", options: ["Larangan mengambil hasil laut/hutan tertentu demi kelestarian.", "Upacara pernikahan adat besar-besaran.", "Tarian penyambutan tamu agung."], answer: 0, category: "Bentuk Kearifan Lokal", explanation: "Sasi merupakan sistem adat larangan eksploitasi alam agar sumber daya laut/hutan dapat beregenerasi." },
+            { question: "Sistem penanggalan tradisional Jawa untuk menentukan musim tanam adalah...", options: ["Pranata Mangsa", "Subak", "Ngada"], answer: 0, category: "Bentuk Kearifan Lokal", explanation: "Pranata Mangsa membaca tanda-tanda alam untuk memandu kegiatan pertanian masyarakat Jawa." },
+            { question: "Rumah adat khas Jawa yang memiliki atap berbentuk tajug/trapesium adalah...", options: ["Joglo", "Tongkonan", "Gadang"], answer: 0, category: "Bentuk Kearifan Lokal", explanation: "Rumah Joglo adalah wujud kearifan lokal arsitektur tradisional Jawa." },
+            { question: "Aturan 'Hutan Larangan Adat' pada masyarakat Baduy bertujuan untuk...", options: ["Menjaga kelestarian ekosistem dan sumber air.", "Menjadikannya tempat wisata komersial.", "Menebang kayu secara bebas."], answer: 0, category: "Bentuk Kearifan Lokal", explanation: "Hutan Larangan dilindungi adat agar keseimbangan alam dan sumber air tetap terjaga." },
+            { question: "Berikut ini yang termasuk kearifan lokal tidak berwujud (intangible) adalah...", options: ["Petuah, nyanyian daerah, dan tradisi lisan.", "Candi Borobudur dan Keris.", "Batik dan Alat Musik Angklung."], answer: 0, category: "Bentuk Kearifan Lokal", explanation: "Tradisi lisan dan nasihat tidak memiliki bentuk fisik tetapi tersimpan dalam ingatan budaya." },
+            { question: "Kearifan lokal berupa tradisi gotong royong mendirikan rumah di Sulawesi Selatan disebut...", options: ["Mappalette Bola", "Subak", "Grebeg Maulud"], answer: 0, category: "Bentuk Kearifan Lokal", explanation: "Mappalette Bola adalah tradisi memindahkan rumah panggung secara bersama-sama oleh warga." },
+
+            // Fungsi Kearifan Lokal
+            { question: "Masyarakat menolak tambang di kawasan hutan suci. Fungsi kearifan lokal di sini adalah...", options: ["Menjaga kelestarian lingkungan dan mencegah bencana.", "Menghambat kemajuan teknologi.", "Menimbulkan konflik antarwarga."], answer: 0, category: "Fungsi Kearifan Lokal", explanation: "Kearifan lokal berfungsi menjaga fungsi ekologis alam dari kerusakan akibat eksploitasi." },
+            { question: "Tradisi gotong royong membersihkan desa berfungsi untuk...", options: ["Memperkuat solidaritas dan kebersamaan sosial warga.", "Meningkatkan persaingan antar tetangga.", "Menghabiskan waktu luang."], answer: 0, category: "Fungsi Kearifan Lokal", explanation: "Gotong royong memupuk rasa persatuan dan kepedulian antar sesama warga." },
+            { question: "Mengapa kearifan lokal penting untuk identitas suatu bangsa?", options: ["Sebagai pembeda berkarakter yang membanggakan di mata dunia.", "Agar bangsa terisolasi dari dunia luar.", "Agar tidak perlu belajar bahasa asing."], answer: 0, category: "Fungsi Kearifan Lokal", explanation: "Kearifan lokal memberikan ciri khas kepribadian dan karakter luhur bagi suatu bangsa." },
+            { question: "Fungsi kearifan lokal dalam pengembangan SDM adalah...", options: ["Membentuk moral dan etika generasi muda.", "Mengajarkan sikap individualis.", "Mendorong gaya hidup konsumtif."], answer: 0, category: "Fungsi Kearifan Lokal", explanation: "Nilai-nilai luhur kearifan lokal mendidik karakter anak bangsa agar santun dan bertanggung jawab." },
+            { question: "Kearifan lokal dapat berfungsi menolak dampak negatif globalisasi dengan cara...", options: ["Menjadi filter sosial terhadap budaya luar yang bertentangan.", "Menutup semua jalur internet.", "Membenci semua orang asing."], answer: 0, category: "Fungsi Kearifan Lokal", explanation: "Kearifan lokal bertindak sebagai penyaring agar nilai-nilai buruk globalisasi tidak merusak norma lokal." },
+
+            // Solusi & Pelestarian
+            { question: "Remaja lebih menyukai budaya pop asing dibanding budaya lokal. Solusi kreatif terbaik adalah...", options: ["Mengenalkan dan mengemas budaya lokal lewat media digital interaktif.", "Melarang remaja mendengarkan musik asing.", "Membiarkan budaya lokal punah secara alami."], answer: 0, category: "Solusi & Pelestarian", explanation: "Digitalisasi dan kemasan modern membuat kebudayaan lokal menarik bagi generasi muda." },
+            { question: "Sikap terbaik kita terhadap bahasa daerah yang mulai jarang digunakan adalah...", options: ["Mempelajari dan membiasakan bertutur kata bahasa daerah di rumah/sekolah.", "Malu menggunakannya karena dianggap tidak keren.", "Menganggap bahasa daerah tidak berguna."], answer: 0, category: "Solusi & Pelestarian", explanation: "Kebiasaan tutur kata harian menjaga bahasa daerah tetap hidup." },
+            { question: "Bagaimana cara siswa SMP berkontribusi menjaga kearifan lokal di sekolah?", options: ["Mengikuti ekstrakurikuler seni budaya dan bangga mengenakan batik.", "Menolak belajar IPS.", "Mengabaikan kegiatan kebudayaan."], answer: 0, category: "Solusi & Pelestarian", explanation: "Berpartisipasi aktif dalam seni budaya di sekolah menunjukkan sikap pelestari." },
+            { question: "Salah satu ancaman terbesar terhadap kearifan lokal di era modern adalah...", options: ["Gaya hidup individualistis dan masuknya budaya luar tanpa penyaringan.", "Banyaknya museum budaya.", "Adanya festival budaya daerah."], answer: 0, category: "Solusi & Pelestarian", explanation: "Individualisme mengikis tradisi kebersamaan dan gotong royong." },
+            { question: "Jika wisatawan berkunjung ke daerah adat, sikap yang menunjukkan penghormatan adalah...", options: ["Mematuhi aturan dan norma adat setempat.", "Bebas berbuat sesuka hati.", "Mengejek tradisi warga."], answer: 0, category: "Solusi & Pelestarian", explanation: "Menghormati tata krama daerah setempat adalah etika penting menghargai kearifan lokal." }
+        ];
+
+        let player = { name: '', class: 'IX-A', no: '' };
+        let currentGame = {
+            questions: [],
+            currentIndex: 0,
+            score: 0,
+            lives: 3,
+            combo: 0,
+            maxCombo: 0,
+            correctCount: 0,
+            wrongCount: 0,
+            timer: 15,
+            timerInterval: null,
+            answersRecord: [],
+            zoneIndex: 0
+        };
+
+        const ZONES = [
+            { name: "ZONA 1: DESA & SAWAH SUBAK", bgSkyTop: "#0f172a", bgSkyBottom: "#065f46", ground: "#047857", type: "subak" },
+            { name: "ZONA 2: JEJAK CANDI & SEJARAH", bgSkyTop: "#451a03", bgSkyBottom: "#9a3412", ground: "#78350F", type: "candi" },
+            { name: "ZONA 3: MARITIM & SASI MALUKU", bgSkyTop: "#0284c7", bgSkyBottom: "#0f4c81", ground: "#0369a1", type: "maritime" },
+            { name: "ZONA 4: MAHAKARYA ADAT NUSANTARA", bgSkyTop: "#3b0764", bgSkyBottom: "#581c87", ground: "#6b21a8", type: "adat" }
+        ];
+
+        function navTo(screenId) {
+            gameAudio.playClick();
+            const screens = ['screen-loading', 'screen-home', 'screen-register', 'screen-tutorial', 'screen-material', 'screen-game', 'screen-result', 'screen-leaderboard', 'screen-review'];
+            screens.forEach(id => {
+                const el = document.getElementById(id);
+                if (el) el.classList.add('hidden');
+            });
+            const target = document.getElementById(screenId);
+            if (target) target.classList.remove('hidden');
+
+            if (screenId === 'screen-game') {
+                initCanvas();
+            }
+        }
+
+        function toggleModal(modalId, show) {
+            gameAudio.playClick();
+            const m = document.getElementById(modalId);
+            if (m) m.classList.toggle('hidden', !show);
+        }
+
+        function switchTab(tabId) {
+            gameAudio.playClick();
+            document.querySelectorAll('.tab-content').forEach(c => c.classList.add('hidden'));
+            document.querySelectorAll('.tab-btn').forEach(b => {
+                b.classList.remove('bg-emerald-600', 'text-white');
+                b.classList.add('bg-slate-800', 'text-slate-400');
+            });
+
+            document.getElementById(tabId).classList.remove('hidden');
+            const btn = document.getElementById('btn-' + tabId);
+            if (btn) {
+                btn.classList.remove('bg-slate-800', 'text-slate-400');
+                btn.classList.add('bg-emerald-600', 'text-white');
+            }
+        }
+
+        // Interactive Class Badge Selection for IX-A to IX-H
+        function selectClassBadge(clsName) {
+            gameAudio.playClick();
+            document.getElementById('reg-class').value = clsName;
+            document.getElementById('selected-class-label').innerText = clsName;
+
+            document.querySelectorAll('.class-badge-btn').forEach(b => {
+                b.classList.remove('selected');
+                b.classList.add('bg-slate-900/80');
+            });
+
+            const activeBtn = document.getElementById('badge-' + clsName);
+            if (activeBtn) {
+                activeBtn.classList.add('selected');
+                activeBtn.classList.remove('bg-slate-900/80');
+            }
+
+            updateLivePreview();
+        }
+
+        function updateLivePreview() {
+            const nameInput = document.getElementById('reg-name').value.trim() || 'Budi Pratama';
+            const cls = document.getElementById('reg-class').value || 'IX-A';
+            const noInput = document.getElementById('reg-no').value || '15';
+
+            document.getElementById('preview-name').innerText = nameInput;
+            document.getElementById('preview-badge').innerText = `KELAS ${cls} • ABSEN ${noInput}`;
+        }
+
+        window.onload = function() {
+            let pct = 0;
+            const bar = document.getElementById('loading-bar');
+            const pctText = document.getElementById('loading-pct');
+            const interval = setInterval(() => {
+                pct += 10;
+                if (bar) bar.style.width = pct + '%';
+                if (pctText) pctText.innerText = pct + '%';
+                if (pct >= 100) {
+                    clearInterval(interval);
+                    setTimeout(() => navTo('screen-home'), 400);
+                }
+            }, 120);
+
+            // Set initial saved player if exists
+            const saved = localStorage.getItem('kearifan_player');
+            if (saved) {
+                try {
+                    player = JSON.parse(saved);
+                    if (player.class) selectClassBadge(player.class);
+                    if (player.name) document.getElementById('reg-name').value = player.name;
+                    if (player.no) document.getElementById('reg-no').value = player.no;
+                    updateLivePreview();
+                } catch(e) {}
+            }
+        };
+
+        function handleRegistration(e) {
+            e.preventDefault();
+            const name = document.getElementById('reg-name').value.trim();
+            const cls = document.getElementById('reg-class').value;
+            const no = document.getElementById('reg-no').value;
+            const err = document.getElementById('reg-error');
+
+            if (!name || !cls || !no) {
+                if (err) err.classList.remove('hidden');
+                return;
+            }
+
+            if (err) err.classList.add('hidden');
+            player = { name, class: cls, no };
+            localStorage.setItem('kearifan_player', JSON.stringify(player));
+            startGame();
+        }
+
+        function startGame() {
+            const saved = localStorage.getItem('kearifan_player');
+            if (saved && !player.name) {
+                player = JSON.parse(saved);
+            }
+            if (!player.name) {
+                navTo('screen-register');
+                return;
+            }
+
+            let shuffled = [...QUESTION_BANK].sort(() => 0.5 - Math.random());
+            let selected = shuffled.slice(0, 15).map(q => {
+                const opts = q.options.map((opt, idx) => ({ text: opt, isCorrect: idx === q.answer }));
+                opts.sort(() => 0.5 - Math.random());
+                const correctIdx = opts.findIndex(o => o.isCorrect);
+                return {
+                    question: q.question,
+                    options: opts.map(o => o.text),
+                    answer: correctIdx,
+                    category: q.category,
+                    explanation: q.explanation
+                };
+            });
+
+            currentGame = {
+                questions: selected,
+                currentIndex: 0,
+                score: 0,
+                lives: 3,
+                combo: 0,
+                maxCombo: 0,
+                correctCount: 0,
+                wrongCount: 0,
+                timer: 15,
+                timerInterval: null,
+                answersRecord: [],
+                zoneIndex: 0
+            };
+
+            document.getElementById('hud-name').innerText = `${player.name} (${player.class})`;
+            navTo('screen-game');
+            loadQuestion();
+            startRunnerAnimation();
+        }
+
+        function loadQuestion() {
+            if (currentGame.currentIndex >= currentGame.questions.length || currentGame.lives <= 0) {
+                endGame();
+                return;
+            }
+
+            const q = currentGame.questions[currentGame.currentIndex];
+            currentGame.zoneIndex = Math.min(Math.floor(currentGame.currentIndex / 4), ZONES.length - 1);
+            document.getElementById('hud-zone').innerText = ZONES[currentGame.zoneIndex].name;
+
+            document.getElementById('q-category').innerText = q.category;
+            document.getElementById('q-number').innerText = `Soal ${currentGame.currentIndex + 1} / ${currentGame.questions.length}`;
+            document.getElementById('q-text').innerText = q.question;
+
+            for (let i = 0; i < 3; i++) {
+                document.getElementById(`opt-text-${i}`).innerText = q.options[i];
+                const btn = document.getElementById(`opt-btn-${i}`);
+                btn.className = "btn-game group relative p-3 md:p-4 bg-slate-900 hover:bg-slate-800 border-2 border-slate-700 hover:border-emerald-500 rounded-xl text-left transition flex items-start gap-3";
+                btn.disabled = false;
+            }
+
+            updateHUD();
+
+            clearInterval(currentGame.timerInterval);
+            currentGame.timer = 15;
+            document.getElementById('hud-timer').innerText = currentGame.timer;
+            
+            currentGame.timerInterval = setInterval(() => {
+                currentGame.timer--;
+                document.getElementById('hud-timer').innerText = currentGame.timer;
+                if (currentGame.timer <= 0) {
+                    clearInterval(currentGame.timerInterval);
+                    handleTimeout();
+                }
+            }, 1000);
+        }
+
+        function submitAnswer(selectedIndex) {
+            clearInterval(currentGame.timerInterval);
+            for (let i = 0; i < 3; i++) {
+                document.getElementById(`opt-btn-${i}`).disabled = true;
+            }
+
+            const q = currentGame.questions[currentGame.currentIndex];
+            const isCorrect = selectedIndex === q.answer;
+
+            currentGame.answersRecord.push({
+                question: q.question,
+                options: q.options,
+                userAnswer: selectedIndex,
+                correctAnswer: q.answer,
+                isCorrect: isCorrect,
+                category: q.category,
+                explanation: q.explanation
+            });
+
+            if (isCorrect) {
+                gameAudio.playCorrect();
+                currentGame.correctCount++;
+                currentGame.combo++;
+                if (currentGame.combo > currentGame.maxCombo) {
+                    currentGame.maxCombo = currentGame.combo;
+                }
+
+                let bonus = 0;
+                if (currentGame.timer >= 10) bonus = 50;
+                else if (currentGame.timer >= 5) bonus = 25;
+
+                let multiplier = 1;
+                if (currentGame.combo >= 7) multiplier = 4;
+                else if (currentGame.combo >= 5) multiplier = 3;
+                else if (currentGame.combo >= 3) multiplier = 2;
+
+                const earned = (100 + bonus) * multiplier;
+                currentGame.score += earned;
+
+                document.getElementById(`opt-btn-${selectedIndex}`).className = "btn-game group relative p-3 md:p-4 bg-emerald-950/80 border-2 border-emerald-400 rounded-xl text-left transition flex items-start gap-3 shadow-lg shadow-emerald-500/20";
+
+                if (currentGame.combo >= 3) {
+                    gameAudio.playCombo();
+                    showComboPopup(`COMBO x${multiplier}! 🔥`);
+                }
+            } else {
+                gameAudio.playWrong();
+                currentGame.wrongCount++;
+                currentGame.combo = 0;
+                currentGame.lives--;
+                currentGame.score = Math.max(0, currentGame.score - 50);
+
+                document.getElementById(`opt-btn-${selectedIndex}`).className = "btn-game group relative p-3 md:p-4 bg-rose-950/80 border-2 border-rose-500 rounded-xl text-left transition flex items-start gap-3";
+                document.getElementById(`opt-btn-${q.answer}`).className = "btn-game group relative p-3 md:p-4 bg-emerald-950/80 border-2 border-emerald-400 rounded-xl text-left transition flex items-start gap-3";
+            }
+
+            updateHUD();
+
+            setTimeout(() => {
+                currentGame.currentIndex++;
+                loadQuestion();
+            }, 1200);
+        }
+
+        function handleTimeout() {
+            gameAudio.playWrong();
+            const q = currentGame.questions[currentGame.currentIndex];
+            currentGame.answersRecord.push({
+                question: q.question,
+                options: q.options,
+                userAnswer: -1,
+                correctAnswer: q.answer,
+                isCorrect: false,
+                category: q.category,
+                explanation: q.explanation
+            });
+            currentGame.wrongCount++;
+            currentGame.combo = 0;
+            currentGame.lives--;
+            updateHUD();
+
+            setTimeout(() => {
+                currentGame.currentIndex++;
+                loadQuestion();
+            }, 1000);
+        }
+
+        function updateHUD() {
+            document.getElementById('hud-score').innerText = currentGame.score;
+            const comboEl = document.getElementById('hud-combo');
+            if (currentGame.combo >= 2) {
+                comboEl.innerText = `COMBO x${currentGame.combo}!`;
+                comboEl.classList.remove('opacity-0');
+            } else {
+                comboEl.classList.add('opacity-0');
+            }
+
+            let heartsHtml = '';
+            for (let i = 0; i < 3; i++) {
+                if (i < currentGame.lives) {
+                    heartsHtml += '<i class="fas fa-heart text-rose-500 animate-pulse"></i>';
+                } else {
+                    heartsHtml += '<i class="far fa-heart text-slate-600"></i>';
+                }
+            }
+            document.getElementById('hud-lives').innerHTML = heartsHtml;
+        }
+
+        function showComboPopup(text) {
+            const el = document.getElementById('combo-popup');
+            el.firstElementChild.innerText = text;
+            el.classList.remove('opacity-0', 'scale-50');
+            el.classList.add('opacity-100', 'scale-100');
+            setTimeout(() => {
+                el.classList.remove('opacity-100', 'scale-100');
+                el.classList.add('opacity-0', 'scale-50');
+            }, 900);
+        }
+
+        function endGame() {
+            clearInterval(currentGame.timerInterval);
+            stopRunnerAnimation();
+
+            const totalAnswered = currentGame.correctCount + currentGame.wrongCount;
+            const accuracy = totalAnswered > 0 ? Math.round((currentGame.correctCount / totalAnswered) * 100) : 0;
+
+            let badge = "PEMULA";
+            let quote = "Jangan menyerah! Pelajari kembali pembahasan dan coba lagi.";
+            if (currentGame.score >= 3000) {
+                badge = "LOCAL WISDOM HERO 👑";
+                quote = "Hebat sekali! Kamu sangat cepat dan teliti. Terus kenali dan lestarikan kearifan lokal Indonesia!";
+            } else if (currentGame.score >= 2000) {
+                badge = "PELESTARI BUDAYA 🌿";
+                quote = "Luar biasa! Pengetahuanmu tentang kearifan lokal Nusantara sangat matang.";
+            } else if (currentGame.score >= 1000) {
+                badge = "PEMBAWA BUDAYA 🚩";
+                quote = "Bagus! Kamu sudah memahami dasar-dasar kearifan lokal dengan cukup baik.";
+            }
+
+            document.getElementById('res-badge').innerText = badge;
+            document.getElementById('res-quote').innerText = `"${quote}"`;
+            document.getElementById('res-score').innerText = currentGame.score;
+            document.getElementById('res-acc').innerText = `${accuracy}%`;
+            document.getElementById('res-correct-wrong').innerText = `${currentGame.correctCount} / ${currentGame.wrongCount}`;
+            document.getElementById('res-max-combo').innerText = `x${currentGame.maxCombo}`;
+
+            saveToLeaderboard({
+                name: player.name,
+                class: player.class,
+                score: currentGame.score,
+                accuracy: accuracy,
+                date: new Date().toLocaleDateString('id-ID')
+            });
+
+            navTo('screen-result');
+        }
+
+        function saveToLeaderboard(entry) {
+            let list = JSON.parse(localStorage.getItem('kearifan_leaderboard') || '[]');
+            list.push(entry);
+            list.sort((a, b) => b.score - a.score);
+            list = list.slice(0, 10);
+            localStorage.setItem('kearifan_leaderboard', JSON.stringify(list));
+        }
+
+        function showLeaderboardScreen() {
+            const list = JSON.parse(localStorage.getItem('kearifan_leaderboard') || '[]');
+            const container = document.getElementById('leaderboard-list');
+            if (list.length === 0) {
+                container.innerHTML = '<div class="p-6 text-center text-slate-500 text-sm">Belum ada skor tersimpan. Jadilah pemenang pertama!</div>';
+            } else {
+                container.innerHTML = list.map((item, idx) => {
+                    let rankBadge = `${idx + 1}`;
+                    if (idx === 0) rankBadge = '🥇';
+                    else if (idx === 1) rankBadge = '🥈';
+                    else if (idx === 2) rankBadge = '🥉';
+
+                    return `
+                        <div class="grid grid-cols-12 px-4 py-3 text-xs md:text-sm items-center hover:bg-slate-900/50 transition">
+                            <div class="col-span-2 text-center font-bold text-amber-400">${rankBadge}</div>
+                            <div class="col-span-5 font-semibold text-slate-100">${item.name}</div>
+                            <div class="col-span-2 text-amber-300 font-mono font-bold">${item.class}</div>
+                            <div class="col-span-3 text-right font-mono font-bold text-emerald-400">${item.score}</div>
+                        </div>
+                    `;
+                }).join('');
+            }
+            navTo('screen-leaderboard');
+        }
+
+        function renderReviewScreen() {
+            const catStats = {};
+            currentGame.answersRecord.forEach(rec => {
+                if (!catStats[rec.category]) {
+                    catStats[rec.category] = { correct: 0, total: 0 };
+                }
+                catStats[rec.category].total++;
+                if (rec.isCorrect) catStats[rec.category].correct++;
+            });
+
+            let lowestCat = '';
+            let lowestPct = 101;
+            let barsHtml = '';
+
+            Object.keys(catStats).forEach(cat => {
+                const total = catStats[cat].total;
+                const correct = catStats[cat].correct;
+                const pct = total > 0 ? Math.round((correct / total) * 100) : 0;
+                
+                if (pct < lowestPct) {
+                    lowestPct = pct;
+                    lowestCat = cat;
+                }
+
+                barsHtml += `
+                    <div>
+                        <div class="flex justify-between text-xs font-semibold mb-1">
+                            <span class="text-slate-300">${cat}</span>
+                            <span class="text-amber-400 font-mono">${pct}%</span>
+                        </div>
+                        <div class="w-full bg-slate-900 h-2.5 rounded-full border border-slate-800 overflow-hidden">
+                            <div class="bg-gradient-to-r from-emerald-500 to-teal-400 h-full rounded-full" style="width: ${pct}%"></div>
+                        </div>
+                    </div>
+                `;
+            });
+
+            document.getElementById('mastery-bars').innerHTML = barsHtml || '<p class="text-xs text-slate-500">Data belum tersedia.</p>';
+            
+            const recEl = document.getElementById('mastery-recommendation');
+            if (lowestCat && lowestPct < 100) {
+                recEl.innerText = `💡 Rekomendasi Belajar: Kamu disarankan memperdalam materi "${lowestCat}" (Penguasaan ${lowestPct}%).`;
+            } else {
+                recEl.innerText = `🎉 Sangat Luar Biasa! Kamu menguasai seluruh materi kearifan lokal dengan sempurna!`;
+            }
+
+            const listEl = document.getElementById('review-list');
+            listEl.innerHTML = currentGame.answersRecord.map((rec, idx) => {
+                const statusBadge = rec.isCorrect 
+                    ? '<span class="bg-emerald-500/20 text-emerald-400 border border-emerald-500/40 px-2.5 py-0.5 rounded-full text-[10px] font-bold">✓ BENAR</span>'
+                    : '<span class="bg-rose-500/20 text-rose-400 border border-rose-500/40 px-2.5 py-0.5 rounded-full text-[10px] font-bold">✕ KURANG TEPAT</span>';
+
+                const userAnsText = rec.userAnswer >= 0 ? rec.options[rec.userAnswer] : 'Waktu Habis';
+                const correctAnsText = rec.options[rec.correctAnswer];
+
+                return `
+                    <div class="bg-slate-900/80 p-4 rounded-2xl border border-slate-800 text-xs md:text-sm space-y-2">
+                        <div class="flex justify-between items-center">
+                            <span class="font-bold text-amber-400">SOAL ${idx + 1}</span>
+                            ${statusBadge}
+                        </div>
+                        <p class="font-semibold text-slate-100">${rec.question}</p>
+                        <div class="bg-slate-950 p-2.5 rounded-xl space-y-1">
+                            <div><span class="text-slate-400">Jawaban Kamu:</span> <span class="${rec.isCorrect ? 'text-emerald-400 font-bold' : 'text-rose-400'}">${userAnsText}</span></div>
+                            ${!rec.isCorrect ? `<div><span class="text-slate-400">Jawaban Benar:</span> <span class="text-emerald-400 font-bold">${correctAnsText}</span></div>` : ''}
+                        </div>
+                        <div class="text-slate-300 bg-emerald-950/30 border border-emerald-500/20 p-2.5 rounded-xl italic text-xs">
+                            <strong>Pembahasan:</strong> ${rec.explanation}
+                        </div>
+                    </div>
+                `;
+            }).join('');
+
+            navTo('screen-review');
+        }
+
+        let canvas, ctx, animFrameId;
+        let runnerState = {
+            x: 80,
+            y: 180,
+            frame: 0,
+            bgOffset: 0,
+            collectibles: []
+        };
+
+        function initCanvas() {
+            canvas = document.getElementById('game-canvas');
+            if (!canvas) return;
+            const rect = canvas.parentElement.getBoundingClientRect();
+            canvas.width = rect.width;
+            canvas.height = rect.height;
+            runnerState.y = canvas.height - 45;
+
+            runnerState.collectibles = [
+                { x: canvas.width + 100, y: runnerState.y - 30, type: '🪙', collected: false, rot: 0 },
+                { x: canvas.width + 300, y: runnerState.y - 45, type: '⭐', collected: false, rot: 0 },
+                { x: canvas.width + 500, y: runnerState.y - 30, type: '⚡', collected: false, rot: 0 }
+            ];
+        }
+
+        function startRunnerAnimation() {
+            if (animFrameId) cancelAnimationFrame(animFrameId);
+            function loop() {
+                updateRunnerCanvas();
+                animFrameId = requestAnimationFrame(loop);
+            }
+            loop();
+        }
+
+        function stopRunnerAnimation() {
+            if (animFrameId) cancelAnimationFrame(animFrameId);
+        }
+
+        function updateRunnerCanvas() {
+            if (!canvas || !ctx) {
+                canvas = document.getElementById('game-canvas');
+                if (canvas) ctx = canvas.getContext('2d');
+                else return;
+            }
+
+            const w = canvas.width;
+            const h = canvas.height;
+            const zone = ZONES[currentGame.zoneIndex] || ZONES[0];
+
+            runnerState.bgOffset = (runnerState.bgOffset + 2.5) % w;
+
+            // 1. Sky Gradient
+            const skyGrad = ctx.createLinearGradient(0, 0, 0, h - 45);
+            skyGrad.addColorStop(0, zone.bgSkyTop);
+            skyGrad.addColorStop(1, zone.bgSkyBottom);
+            ctx.fillStyle = skyGrad;
+            ctx.fillRect(0, 0, w, h);
+
+            // 2. Sun Glow & Clouds
+            ctx.fillStyle = "#F59E0B";
+            ctx.beginPath();
+            ctx.arc(w - 75, 40, 24, 0, Math.PI * 2);
+            ctx.fill();
+
+            ctx.fillStyle = "rgba(255, 255, 255, 0.25)";
+            const cloudX = (runnerState.bgOffset * 0.4) % (w + 100);
+            ctx.beginPath();
+            ctx.arc(w - cloudX, 30, 15, 0, Math.PI * 2);
+            ctx.arc(w - cloudX + 20, 25, 20, 0, Math.PI * 2);
+            ctx.arc(w - cloudX + 40, 30, 15, 0, Math.PI * 2);
+            ctx.fill();
+
+            // 3. Zone Specific Background Scenery
+            if (zone.type === "subak") {
+                ctx.fillStyle = "rgba(4, 120, 87, 0.45)";
+                for (let i = 0; i < 3; i++) {
+                    const hillOffset = (runnerState.bgOffset * (0.3 + i * 0.2)) % w;
+                    ctx.beginPath();
+                    ctx.moveTo(-hillOffset, h - 45);
+                    ctx.quadraticCurveTo(100 - hillOffset, h - 100 - i * 15, 250 - hillOffset, h - 45);
+                    ctx.quadraticCurveTo(400 - hillOffset, h - 110 - i * 10, 600 - hillOffset, h - 45);
+                    ctx.lineTo(w + 300 - hillOffset, h - 45);
+                    ctx.lineTo(w, h);
+                    ctx.lineTo(0, h);
+                    ctx.fill();
+                }
+
+                // Joglo Roof Silhouette
+                const jogloX = (w + 150 - runnerState.bgOffset * 1.2) % (w + 250);
+                ctx.fillStyle = "#78350F";
+                ctx.beginPath();
+                ctx.moveTo(jogloX, h - 45);
+                ctx.lineTo(jogloX + 15, h - 75);
+                ctx.lineTo(jogloX + 35, h - 90);
+                ctx.lineTo(jogloX + 55, h - 75);
+                ctx.lineTo(jogloX + 70, h - 45);
+                ctx.fill();
+
+            } else if (zone.type === "candi") {
+                const candiX = (w + 200 - runnerState.bgOffset * 0.8) % (w + 300);
+                ctx.fillStyle = "rgba(69, 26, 3, 0.85)";
+                ctx.beginPath();
+                ctx.rect(candiX, h - 90, 80, 45);
+                ctx.arc(candiX + 40, h - 90, 20, Math.PI, 0);
+                ctx.rect(candiX + 35, h - 125, 10, 20);
+                ctx.fill();
+
+            } else if (zone.type === "maritime") {
+                ctx.fillStyle = "rgba(15, 76, 129, 0.6)";
+                ctx.beginPath();
+                const waveOffset = runnerState.bgOffset * 0.8;
+                ctx.moveTo(0, h - 60);
+                for (let x = 0; x <= w; x += 30) {
+                    ctx.lineTo(x, h - 60 + Math.sin((x + waveOffset) * 0.05) * 8);
+                }
+                ctx.lineTo(w, h);
+                ctx.lineTo(0, h);
+                ctx.fill();
+
+            } else {
+                const gadangX = (w + 100 - runnerState.bgOffset * 1.1) % (w + 300);
+                ctx.fillStyle = "#581c87";
+                ctx.beginPath();
+                ctx.moveTo(gadangX, h - 105);
+                ctx.quadraticCurveTo(gadangX + 30, h - 70, gadangX + 60, h - 70);
+                ctx.quadraticCurveTo(gadangX + 90, h - 70, gadangX + 120, h - 105);
+                ctx.lineTo(gadangX + 100, h - 65);
+                ctx.lineTo(gadangX + 20, h - 65);
+                ctx.fill();
+            }
+
+            // 4. Track / Ground Line
+            const groundY = h - 45;
+            ctx.fillStyle = zone.ground;
+            ctx.fillRect(0, groundY, w, 45);
+
+            ctx.strokeStyle = "#F59E0B";
+            ctx.lineWidth = 3;
+            ctx.beginPath();
+            ctx.moveTo(0, groundY);
+            ctx.lineTo(w, groundY);
+            ctx.stroke();
+
+            ctx.strokeStyle = "rgba(255, 255, 255, 0.5)";
+            ctx.lineWidth = 3;
+            for (let x = -runnerState.bgOffset; x < w; x += 45) {
+                ctx.beginPath();
+                ctx.moveTo(x, groundY + 22);
+                ctx.lineTo(x + 22, groundY + 22);
+                ctx.stroke();
+            }
+
+            // 5. Collectible Bonus Items
+            runnerState.collectibles.forEach(c => {
+                c.x -= 3.2;
+                c.rot += 0.08;
+
+                if (c.x < -30) {
+                    c.x = w + Math.random() * 250 + 120;
+                    c.collected = false;
+                }
+
+                if (!c.collected && Math.abs(c.x - runnerState.x) < 28) {
+                    c.collected = true;
+                    if (c.type === '🪙') {
+                        gameAudio.playCoin();
+                        currentGame.score += 25;
+                    } else if (c.type === '⭐') {
+                        gameAudio.playCoin();
+                        currentGame.score += 50;
+                    } else if (c.type === '⚡') {
+                        gameAudio.playCoin();
+                        currentGame.timer = Math.min(15, currentGame.timer + 5);
+                    }
+                    updateHUD();
+                }
+
+                if (!c.collected) {
+                    ctx.save();
+                    ctx.translate(c.x, c.y);
+                    ctx.rotate(Math.sin(c.rot) * 0.2);
+                    ctx.font = "24px serif";
+                    ctx.textAlign = "center";
+                    ctx.textBaseline = "middle";
+                    ctx.fillText(c.type, 0, 0);
+                    ctx.restore();
+                }
+            });
+
+            // 6. Animated Runner Avatar
+            runnerState.frame = (runnerState.frame + 0.22) % (Math.PI * 2);
+            const legSwing = Math.sin(runnerState.frame) * 14;
+            const armSwing = Math.cos(runnerState.frame) * 12;
+
+            const px = runnerState.x;
+            const py = groundY - 45;
+
+            // Head & Skin
+            ctx.fillStyle = "#FCD34D";
+            ctx.beginPath();
+            ctx.arc(px, py, 9, 0, Math.PI * 2);
+            ctx.fill();
+
+            // Udeng Headband
+            ctx.fillStyle = "#78350F";
+            ctx.fillRect(px - 10, py - 8, 20, 5);
+            ctx.fillStyle = "#B45309";
+            ctx.beginPath();
+            ctx.arc(px + 8, py - 6, 3, 0, Math.PI * 2);
+            ctx.fill();
+
+            // Torso (White SMP Uniform)
+            ctx.fillStyle = "#FFFFFF";
+            ctx.fillRect(px - 6, py + 9, 12, 18);
+
+            // Red SMP Tie
+            ctx.fillStyle = "#DC2626";
+            ctx.beginPath();
+            ctx.moveTo(px - 1, py + 9);
+            ctx.lineTo(px + 1, py + 9);
+            ctx.lineTo(px, py + 18);
+            ctx.fill();
+
+            // Blue Shorts
+            ctx.fillStyle = "#1E3A8A";
+            ctx.fillRect(px - 6, py + 27, 12, 10);
+
+            // Animated Running Legs
+            ctx.strokeStyle = "#FCD34D";
+            ctx.lineWidth = 4;
+            ctx.lineCap = "round";
+
+            ctx.beginPath();
+            ctx.moveTo(px - 3, py + 37);
+            ctx.lineTo(px - 3 - legSwing, py + 48);
+            ctx.stroke();
+
+            ctx.beginPath();
+            ctx.moveTo(px + 3, py + 37);
+            ctx.lineTo(px + 3 + legSwing, py + 48);
+            ctx.stroke();
+
+            // Animated Running Arms
+            ctx.strokeStyle = "#FFFFFF";
+            ctx.lineWidth = 3;
+            ctx.beginPath();
+            ctx.moveTo(px - 5, py + 12);
+            ctx.lineTo(px - 5 + armSwing, py + 22);
+            ctx.stroke();
+
+            ctx.beginPath();
+            ctx.moveTo(px + 5, py + 12);
+            ctx.lineTo(px + 5 - armSwing, py + 22);
+            ctx.stroke();
+        }
+    </script>
+</body>
+</html>
